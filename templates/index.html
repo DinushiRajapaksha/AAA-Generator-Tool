@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAA Generator Tool - IFS Documentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-cube"></i> AAA Generator Tool</h1>
+                <p class="subtitle">Automatically generate AAA blocks for SAR scripts from IFS documentation</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel: Input Form -->
+            <div class="input-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-edit"></i> Input Documentation</h2>
+                        <button class="btn-secondary" id="loadExampleBtn">
+                            <i class="fas fa-lightbulb"></i> Load Example
+                        </button>
+                    </div>
+                    
+                    <form id="generatorForm">
+                        <div class="form-group">
+                            <label for="activityId">
+                                <i class="fas fa-hashtag"></i> Activity Diagram ID
+                            </label>
+                            <input 
+                                type="text" 
+                                id="activityId" 
+                                name="activity_id" 
+                                placeholder="e.g., 2.11.1.1"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="activityName">
+                                <i class="fas fa-tag"></i> Activity Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="activityName" 
+                                name="activity_name" 
+                                placeholder="e.g., Enter Credit Analyst User"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="documentation">
+                                <i class="fas fa-file-alt"></i> IFS Documentation Text
+                            </label>
+                            <textarea 
+                                id="documentation" 
+                                name="documentation" 
+                                rows="15"
+                                placeholder="Paste IFS documentation here including Explanation, Prerequisites, and System Effects sections..."
+                                required
+                            ></textarea>
+                            <small class="hint">
+                                <i class="fas fa-info-circle"></i> 
+                                Include sections: Explanation, Prerequisites, System Effects
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="generateBtn">
+                            <i class="fas fa-magic"></i> Generate AAA Block
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output -->
+            <div class="output-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-file-code"></i> Generated AAA Block</h2>
+                        <button class="btn-secondary" id="copyBtn" style="display: none;">
+                            <i class="fas fa-copy"></i> Copy to Clipboard
+                        </button>
+                    </div>
+                    
+                    <div id="outputArea" class="output-area">
+                        <div class="empty-state">
+                            <i class="fas fa-arrow-left"></i>
+                            <p>Fill in the form and click "Generate AAA Block" to see results</p>
+                        </div>
+                    </div>
+
+                    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Generating...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example Modal -->
+        <div id="exampleModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-lightbulb"></i> Load Example</h3>
+                    <button class="close-modal" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body" id="exampleList">
+                    <!-- Examples will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
